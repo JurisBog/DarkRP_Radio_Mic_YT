@@ -66,7 +66,6 @@
 						videoId: "",
 						events: {
 							'onReady': onPlayerReady,
-							'onStateChange': onPlayerStateChange,
 						}
 					} );
 					
@@ -82,17 +81,10 @@
 					rad.ReadyToGo();
 				}
 				
-				function onPlayerStateChange( event ) {
-				
-					if ( event.data == 5 ) {
-						event.target.playVideo();
-					}
-				}
-				
 				window.YTPlayer = {
 				
 					cueVideo: function ( id, seek ) {
-						this.player.cueVideoById( id, seek );
+						this.player.loadVideoById( id, seek );
 					},
 					
 					setVolume: function ( time ) {
@@ -100,7 +92,6 @@
 					},
 					
 					stopVideo: function () {
-						this.player.videoId = "";
 						this.player.stopVideo();
 					}
 				}
