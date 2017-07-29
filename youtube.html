@@ -69,7 +69,22 @@
 						}
 					} );
 					
-					YTPlayer.player = player;
+					window.YTPlayer = {
+						
+						player: player,
+						
+						cueVideo: function ( id, seek ) {
+							this.player.loadVideoById( id, seek );
+						},
+						
+						setVolume: function ( time ) {
+							this.player.setVolume( time );
+						},
+						
+						stopVideo: function () {
+							this.player.stopVideo();
+						}
+					}
 				}
 				
 				function onPlayerReady( event ) {
@@ -79,21 +94,6 @@
 					}
 					
 					rad.ReadyToGo();
-				}
-				
-				window.YTPlayer = {
-				
-					cueVideo: function ( id, seek ) {
-						this.player.loadVideoById( id, seek );
-					},
-					
-					setVolume: function ( time ) {
-						this.player.setVolume( time );
-					},
-					
-					stopVideo: function () {
-						this.player.stopVideo();
-					}
 				}
 		</script>
 	</body>
