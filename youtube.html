@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<style>
+			html, body {
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: black;
+				overflow: hidden;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id=player></div>
+		
+		<script>
+				var tag = document.createElement('script');
+
+				tag.src = "https://www.youtube.com/iframe_api";
+				var firstScriptTag = document.getElementsByTagName('script')[0];
+				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+				function onYouTubeIframeAPIReady() {
+				
+					var player = new YT.Player( 'player', {
+						
+						playerVars: {
+							autoplay: 0,
+							controls: 0,
+							cc_load_policy: 1,
+							disablekb: 1,
+							modestbranding: 1,
+							rel: 0,
+							showinfo: 0
+						},
+						
+						height: '1',
+						width: '1',
+						videoId: '',
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange,
+						}
+					} );
+				}
+				
+				function onPlayerReady( event ) {
+					rad.PlayerReady();
+				}
+
+				function onPlayerStateChange( event ) {
+					if ( event.data == 5 ) {
+						rad.VideoCued();
+					}
+				}
+
+				function cueVideo( id, seek ) {
+					player.cueVideoById( id, seek );
+				}
+
+				function seekTo( time ) {
+					player.seekTo( time );
+				}
+
+				function setVolume( time ) {
+					player.setVolume( time );
+				}
+
+				function stopVideo() {
+					player.stopVideo();
+				}
+			};
+		</script>
+	</body>
+</html>
