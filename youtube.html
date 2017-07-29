@@ -23,6 +23,8 @@
 		<div id=player></div>
 		
 		<script>
+		
+				var volumeFix;
 				var tag = document.createElement('script');
 
 				tag.src = "https://www.youtube.com/iframe_api";
@@ -56,12 +58,17 @@
 						
 						player: player,
 						
-						cueVideo: function ( id, seek ) {
+						cueVideo: function ( id, seek, vol ) {
+						
+							if ( typeof vol !== "undefined" ) {
+								volumeFix = vol;
+							}
+							
 							this.player.loadVideoById( id, seek );
 						},
 						
-						setVolume: function ( time ) {
-							this.player.setVolume( time );
+						setVolume: function ( vol ) {
+							this.player.setVolume( vol );
 						},
 						
 						stopVideo: function () {
@@ -78,12 +85,11 @@
 					Volume fix
 				*/
 				
-				var volumeFixed = false;
-				
 				function onPlayerStateChange( event ) {
-					if ( event.data == YT.PlayerState.PLAYING && !volumeFixed ) {	
-						volumeFixed = true;
-						event.target.setVolume( 0 );
+					if ( event.data == YT.PlayerState.PLAYING && ( typeof volumeFix !== "undefined" ) ) {
+						
+						event.target.setVolume( volumeFix );
+						volumeFix = undefined;
 					}
 				}
 		</script>
