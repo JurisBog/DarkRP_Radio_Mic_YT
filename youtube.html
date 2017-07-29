@@ -69,6 +69,8 @@
 							'onStateChange': onPlayerStateChange,
 						}
 					} );
+					
+					YTPlayer.player = player;
 				}
 				
 				function onPlayerReady( event ) {
@@ -87,16 +89,19 @@
 					}
 				}
 				
-				function cueVideo( id, seek ) {
-					player.cueVideoById( id, seek );
-				}
+				window.YTPlayer = {
 				
-				function setVolume( time ) {
-					player.setVolume( time );
-				}
-				
-				function stopVideo() {
-					player.stopVideo();
+					cueVideo: function ( id, seek ) {
+						this.player.cueVideoById( id, seek );
+					},
+					
+					setVolume: function ( time ) {
+						this.player.setVolume( time );
+					},
+					
+					stopVideo: function () {
+						this.player.stopVideo();
+					}
 				}
 		</script>
 	</body>
