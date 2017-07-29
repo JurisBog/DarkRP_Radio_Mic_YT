@@ -74,7 +74,7 @@
 				function onPlayerReady( event ) {
 					
 					if ( typeof( VIDEO_VOLUME ) != "undefined" ) {
-						player.setVolume( VIDEO_VOLUME );
+						event.target.setVolume( VIDEO_VOLUME );
 					}
 					
 					rad.ReadyToGo();
@@ -83,7 +83,7 @@
 				function onPlayerStateChange( event ) {
 				
 					if ( event.data == 5 ) {
-						player.playVideo();
+						event.target.playVideo();
 					}
 				}
 				
