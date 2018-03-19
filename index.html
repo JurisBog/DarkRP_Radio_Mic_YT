@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+
+		<style>
+			html, body {
+				width: 100%;
+				height: 100%;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				background-color: black;
+				overflow: hidden;
+			}
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id=player></div>
+		
+		<script>
+		
+				var volumeFix;
+				var tag = document.createElement('script');
+
+				tag.src = "https://www.youtube.com/iframe_api";
+				var firstScriptTag = document.getElementsByTagName('script')[0];
+				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+				
+				function onYouTubeIframeAPIReady() {
+				
+					var player = new YT.Player( 'player', {
+						
+						playerVars: {
+							autoplay: 0,
+							controls: 0,
+							cc_load_policy: 1,
+							disablekb: 1,
+							modestbranding: 1,
+							rel: 0,
+							showinfo: 0
+						},
+						
+						height: '1',
+						width: '1',
+						videoId: "",
+						events: {
+							'onReady': onPlayerReady,
+							'onStateChange': onPlayerStateChange
+						}
+					} );
+					
+					window.YTPlayer = {
+						
+						player: player,
+						
+						cueVideo: function ( id, seek, vol ) {
+						
+							if ( typeof vol !== "undefined" ) {
+								volumeFix = vol;
+							}
+							
+							this.player.loadVideoById( id, seek );
+						},
+						
+						setVolume: function ( vol ) {
+							this.player.setVolume( vol );
+						},
+						
+						stopVideo: function () {
+							this.player.stopVideo();
+						}
+					}
+				}
+				
+				function onPlayerReady( event ) {
+					rad.ReadyToGo();
+				}
+				
+				/*
+					Volume fix
+				*/
+				
+				function onPlayerStateChange( event ) {
+					if ( event.data == YT.PlayerState.PLAYING && ( typeof volumeFix !== "undefined" ) ) {
+						
+						event.target.setVolume( volumeFix );
+						volumeFix = undefined;
+					}
+				}
+		</script>
+	</body>
+</html>
