@@ -30,9 +30,9 @@
 				tag.src = "https://www.youtube.com/iframe_api";
 				var firstScriptTag = document.getElementsByTagName('script')[0];
 				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-				
+				console.log("Preparing the hook")
 				function onYouTubeIframeAPIReady() {
-				
+					console.log("Hook Called")
 					var player = new YT.Player( 'player', {
 						
 						playerVars: {
