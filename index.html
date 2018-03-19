@@ -23,76 +23,78 @@
 		<div id=player></div>
 		
 		<script>
-		
-				var volumeFix;
-				var tag = document.createElement('script');
+			window.onload = function() {
+				console.log("This is a test")
+			}
+				// var volumeFix;
+				// var tag = document.createElement('script');
 
-				tag.src = "https://www.youtube.com/iframe_api";
-				var firstScriptTag = document.getElementsByTagName('script')[0];
-				firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-				console.log("Testing stuff")
-				console.log("Preparing the hook")
-				function onYouTubeIframeAPIReady() {
-					console.log("Hook Called")
-					var player = new YT.Player( 'player', {
+				// tag.src = "https://www.youtube.com/iframe_api";
+				// var firstScriptTag = document.getElementsByTagName('script')[0];
+				// firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+				// console.log("Testing stuff")
+				// console.log("Preparing the hook")
+				// function onYouTubeIframeAPIReady() {
+				// 	console.log("Hook Called")
+				// 	var player = new YT.Player( 'player', {
 						
-						playerVars: {
-							autoplay: 0,
-							controls: 0,
-							cc_load_policy: 1,
-							disablekb: 1,
-							modestbranding: 1,
-							rel: 0,
-							showinfo: 0
-						},
+				// 		playerVars: {
+				// 			autoplay: 0,
+				// 			controls: 0,
+				// 			cc_load_policy: 1,
+				// 			disablekb: 1,
+				// 			modestbranding: 1,
+				// 			rel: 0,
+				// 			showinfo: 0
+				// 		},
 						
-						height: '1',
-						width: '1',
-						videoId: "",
-						events: {
-							'onReady': onPlayerReady,
-							'onStateChange': onPlayerStateChange
-						}
-					} );
+				// 		height: '1',
+				// 		width: '1',
+				// 		videoId: "",
+				// 		events: {
+				// 			'onReady': onPlayerReady,
+				// 			'onStateChange': onPlayerStateChange
+				// 		}
+				// 	} );
 					
-					window.YTPlayer = {
+				// 	window.YTPlayer = {
 						
-						player: player,
+				// 		player: player,
 						
-						cueVideo: function ( id, seek, vol ) {
+				// 		cueVideo: function ( id, seek, vol ) {
 						
-							if ( typeof vol !== "undefined" ) {
-								volumeFix = vol;
-							}
+				// 			if ( typeof vol !== "undefined" ) {
+				// 				volumeFix = vol;
+				// 			}
 							
-							this.player.loadVideoById( id, seek );
-						},
+				// 			this.player.loadVideoById( id, seek );
+				// 		},
 						
-						setVolume: function ( vol ) {
-							this.player.setVolume( vol );
-						},
+				// 		setVolume: function ( vol ) {
+				// 			this.player.setVolume( vol );
+				// 		},
 						
-						stopVideo: function () {
-							this.player.stopVideo();
-						}
-					}
-				}
+				// 		stopVideo: function () {
+				// 			this.player.stopVideo();
+				// 		}
+				// 	}
+				// }
 				
-				function onPlayerReady( event ) {
-					rad.ReadyToGo();
-				}
+				// function onPlayerReady( event ) {
+				// 	rad.ReadyToGo();
+				// }
 				
-				/*
-					Volume fix
-				*/
+				// /*
+				// 	Volume fix
+				// */
 				
-				function onPlayerStateChange( event ) {
-					if ( event.data == YT.PlayerState.PLAYING && ( typeof volumeFix !== "undefined" ) ) {
+				// function onPlayerStateChange( event ) {
+				// 	if ( event.data == YT.PlayerState.PLAYING && ( typeof volumeFix !== "undefined" ) ) {
 						
-						event.target.setVolume( volumeFix );
-						volumeFix = undefined;
-					}
-				}
+				// 		event.target.setVolume( volumeFix );
+				// 		volumeFix = undefined;
+				// 	}
+				// }
 		</script>
 	</body>
 </html>
